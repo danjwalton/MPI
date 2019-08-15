@@ -73,9 +73,10 @@ options("RStata.StataPath"="\"D:\\Program Files (x86)\\Stata13\\StataMP-64\"")
 options("RStata.StataVersion"=13.1)
 stata("set more off, permanently")
 
-pb <- txtProgressBar(0,length(missing),style=3)
-for(i in 1:length(missing)){
-  stata(paste0("project_code/do files/",missing[i]))
+###Iterate through DHS surveys
+pb <- txtProgressBar(0,length(dhs.names),style=3)
+for(i in 1:length(dhs.names)){
+  stata(paste0("project_code/do files/",dhs.names[i]))
   setTxtProgressBar(pb,i)
 }
 close(pb)
