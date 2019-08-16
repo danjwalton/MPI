@@ -18,6 +18,7 @@ mics_dat <- subset(mics_dat,dataset.url!="")
 urls <- mics_dat$dataset.url
 # urls <- urls[c(184:length(urls))]
 uniquesavs=c()
+
 for(url in urls){
   if(exists("ch")){rm(ch)}
   if(exists("hh")){rm(hh)}
@@ -28,11 +29,11 @@ for(url in urls){
   if(exists("uncaptured_list")){rm(uncaptured_list)}
   filename <- gsub("%20","_",basename.url(url))
   uniquename <- substr(filename,1,nchar(filename)-4)
-  message(uniquename)
+  message(paste(uniquename)," ... ",match(url,urls),"/",length(urls))
   tmp <- tempfile()
   download.file(url,tmp,quiet=T)
   zip.contents <- unzip(tmp,exdir="large.data")
-  
+  if(!(exists("zip.contents"))){ next; }
   file.remove(tmp)
   
   if("zip" %in% str_sub(zip.contents,-3)){
@@ -57,7 +58,8 @@ for(url in urls){
   mn.sav <- c(mn.sav,mn.sav2)
   bh.sav <- zip.contents[which(grepl("^bh(.*)sav|(.*)bh.sav",tolower(basename(zip.contents))))]
   if(length(ch.sav)>0){
-    ch <- read.spss(ch.sav, use.value.labels = T)
+    ch <- read.spss(ch.sav, use.value.labels = F)
+    ch["FILTER_$"] <- NULL
     #ch.labs <- data.frame(var.name=names(ch),var.lab=attributes(ch)$variable.labels)
     #ch$filename <- uniquename
   }else{
@@ -65,7 +67,8 @@ for(url in urls){
     #ch.labs <- NULL
   }
   if(length(hh.sav)>0){
-    hh <- read.spss(hh.sav, use.value.labels = T)
+    hh <- read.spss(hh.sav, use.value.labels = F)
+    hh["FILTER_$"] <- NULL
     #hh.labs <- data.frame(var.name=names(hh),var.lab=attributes(hh)$variable.labels)
     #hh$filename <- uniquename
   }else{
@@ -73,7 +76,8 @@ for(url in urls){
     #hh.labs <- NULL
   }
   if(length(hl.sav)>0){
-    hl <- read.spss(hl.sav, use.value.labels = T)
+    hl <- read.spss(hl.sav, use.value.labels = F)
+    hl["FILTER_$"] <- NULL
     #hl.labs <- data.frame(var.name=names(hl),var.lab=attributes(hl)$variable.labels)
     #hl$filename <- uniquename
   }else{
@@ -81,7 +85,8 @@ for(url in urls){
     #hl.labs <- NULL
   }
   if(length(wm.sav)>0){
-    wm <- read.spss(wm.sav, use.value.labels = T)
+    wm <- read.spss(wm.sav, use.value.labels = F)
+    wm["FILTER_$"] <- NULL
     #if(length(attributes(wm)$variable.labels)>0){
     #wm.labs <- data.frame(var.name=names(wm),var.lab=attributes(wm)$variable.labels)
     #}else{
@@ -97,6 +102,7 @@ for(url in urls){
       mn.sav <- mn.sav[grepl("mnmn",tolower(mn.sav))]
     }
     mn <- read.spss(mn.sav, use.value.labels = T)
+    mn["FILTER_$"] <- NULL
     #if(length(attributes(mn)$variable.labels)>0){
     #mn.labs <- data.frame(var.name=names(mn),var.lab=attributes(mn)$variable.labels)
     #}else{
@@ -112,6 +118,7 @@ if(length(bh.sav)>0){
     bh.sav <- bh.sav[grepl("bhbh",tolower(bh.sav))]
   }
   bh <- read.spss(bh.sav, use.value.labels = T)
+  bh["FILTER_$"] <- NULL
 }else{
   bh <- NULL
 }
@@ -143,4 +150,5 @@ if(length(bh.sav)>0){
     write_dta(as.data.frame(mn),paste0(dtapath,"/mn.dta"),version=13.1)
     write_dta(as.data.frame(bh),paste0(dtapath,"/bh.dta"),version=13.1)
   },error=function(e){return(NULL)})
+  rm(zip.contents)
 }
