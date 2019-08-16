@@ -17,9 +17,9 @@ set mem 500m
 
 
 *** Working Folder Path ***
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files
-global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
-global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
+global path_in "T:/GMPI 2.0/rdta/Libya PAPFAM 2014" 
+global path_out "G:/GMPI 2.0/cdta"
+global path_ado "T:/GMPI 2.0/ado"
 
 
 ********************************************************************************

@@ -18,7 +18,7 @@ set mem 500m
 
 
 *** Working Folder Path ***
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files
+global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files/Sierra_Leone_MICS6_Datasets
 global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
 global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
 

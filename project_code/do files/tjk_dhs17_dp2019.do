@@ -42,7 +42,7 @@ were recorded for children age 0-59 months and women age 15-49 (p.3). */
 /*The purpose of step 1.1 is to compute anthropometric measures for children 
 under 5 years.*/
 
-use "$path_in/TJPR71FL.DTA", clear 
+use "$path_in/TJPR70FL.DTA", clear 
 
 *** Generate individual unique key variable required for data merging using:
 	*** hv001=cluster number; 
@@ -249,7 +249,7 @@ erase "$path_out/children_nutri_tjk_z_rc.dta"
 /*The purpose of step 1.2 is to identify children under 18 who died in 
 the last 5 years prior to the survey date.*/
 
-use "$path_in/TJBR71FL.DTA", clear
+use "$path_in/TJBR70FL.DTA", clear
 
 		
 *** Generate individual unique key variable required for data merging
@@ -339,7 +339,7 @@ save "$path_out/TJK17_BR.dta", replace
 /*The purpose of step 1.3 is to identify all deaths that are reported by 
 eligible women.*/
 
-use "$path_in/TJIR71FL.DTA", clear
+use "$path_in/TJIR70FL.DTA", clear
 
 *** Generate individual unique key variable required for data merging
 *** v001=cluster number;  
@@ -371,7 +371,7 @@ save "$path_out/TJK17_IR.dta", replace
 ********************************************************************************
 /*The purpose of step 1.4 is to compute bmi-for-age for girls 15-19 years. */
 
-use "$path_in/TJPR71FL.DTA", clear
+use "$path_in/TJPR70FL.DTA", clear
 
 		
 *** Generate individual unique key variable required for data merging using:
@@ -544,7 +544,7 @@ erase "$path_out/girl_nutri_tjk_z.dta"
 *** Step 1.7  PR - HOUSEHOLD MEMBER'S RECODE 
 ********************************************************************************
 
-use "$path_in/TJPR71FL.DTA", clear
+use "$path_in/TJPR70FL.DTA", clear
 
 
 *** Generate a household unique key variable at the household level using: 

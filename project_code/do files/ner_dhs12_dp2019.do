@@ -626,7 +626,7 @@ tab ha40 if ha65==1 & ha13 ==0 & hv117==1 & teen_IR ==. & (hv105>=15 & hv105<=19
 	It should be noted that they have BMI information but not BMI-for-age.*/
 drop _merge
 
-erase "$path_out/NER12_IR_girls.dta"
+erase "$path_out/ner12_IR_girls.dta"
 
 
 *** Merging MR Recode 
@@ -641,7 +641,7 @@ tab hb13 hb65 if hv118==1 & men_MR==., miss
 
 drop _merge
 
-erase "$path_out/NER12_MR.dta"
+erase "$path_out/ner12_MR.dta"
 
 
 *** Merging KR Recode 
@@ -663,7 +663,7 @@ replace hv102 = v135 if b16==0 & child_KR==1
 tab child_KR underweight if b16==0 & child_KR==1, miss  
 drop _merge
 
-erase "$path_out/NER12_KR.dta"
+erase "$path_out/ner12_KR.dta"
 
 
 sort ind_id

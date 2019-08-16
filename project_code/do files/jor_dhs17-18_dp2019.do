@@ -59,7 +59,7 @@ unreliable due to anomalies in the individual values (p.197)*/
 /*The purpose of step 1.2 is to identify children under 18 who died in 
 the last 5 years prior to the survey date.*/
 
-use "$path_in/JOBR72FL.DTA", clear
+use "$path_in/JOBR71FL.DTA", clear
 
 	
 *** Generate individual unique key variable required for data merging
@@ -148,7 +148,7 @@ save "$path_out/JOR17-18_BR.dta", replace
 /*The purpose of step 1.3 is to identify all deaths that are reported by 
 eligible women.*/
 
-use "$path_in/JOIR72FL.DTA", clear
+use "$path_in/JOIR71FL.DTA", clear
 
 	
 *** Generate individual unique key variable required for data merging
@@ -183,7 +183,7 @@ save "$path_out/JOR17-18_IR.dta", replace
 ********************************************************************************
 /*The purpose of step 1.4 is to compute bmi-for-age for girls 15-19 years. */
 
-use "$path_in/JOPR72FL.DTA", clear
+use "$path_in/JOPR71FL.DTA", clear
 
 		
 *** Generate individual unique key variable required for data merging using:
@@ -340,7 +340,7 @@ erase "$path_out/girl_nutri_jor_z.dta"
 /*The purpose of step 1.5 is to identify all deaths that are reported by 
 eligible men.*/
 
-use "$path_in/JOMR72FL.DTA", clear
+use "$path_in/JOMR71FL.DTA", clear
 
 	
 *** Generate individual unique key variable required for data merging
@@ -383,7 +383,7 @@ command lines under this section have been removed.*/
 *** Step 1.7  PR - HOUSEHOLD MEMBER'S RECODE 
 ********************************************************************************
 
-use "$path_in/JOPR72FL.DTA", clear
+use "$path_in/JOPR71FL.DTA", clear
 
 	
 *** Generate a household unique key variable at the household level using: 

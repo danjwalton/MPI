@@ -247,7 +247,7 @@ duplicates report ind_id
 	//Erase files from folder:
 erase "$path_out/children_nutri_mdg_z_rc.xls"
 erase "$path_out/children_nutri_mdg_prev_rc.xls"
-erase "$path_out/children_nutri_mdg_z_rc.dta"
+erase "$path_out/children_nutri_mDG_z_rc.dta"
 
 
 	//Save a temp file for merging with PR:
