@@ -16,9 +16,9 @@ set maxvar 10000
 set mem 500m
 
 *** Working Folder Path ***
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files
-global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
-global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
+global path_in G:/My Drive/Work/GitHub/MPI/project_data/DHS MICS data files
+global path_out G:/My Drive/Work/GitHub/MPI/project_data/MPI out
+global path_ado G:/My Drive/Work/GitHub/MPI/project_data/ado
 
 
 ********************************************************************************
@@ -42,7 +42,7 @@ anthropometric information was not collected from men 15-49 */
 *** Step 1.1 KR - CHILDREN's RECODE (under 5)
 ********************************************************************************
 
-use "$path_in/TZKR7HFL.DTA", clear 
+use "$path_in/TZKR7AFL.DTA", clear 
 
 
 *** Generate individual unique key variable required for data merging
@@ -245,7 +245,7 @@ save "$path_out/TZA15-16_KR.dta", replace
 *** (All females 15-49 years who ever gave birth)  
 ********************************************************************************
 
-use "$path_in/TZBR7HFL.DTA", clear
+use "$path_in/TZBR7AFL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -334,7 +334,7 @@ save "$path_out/TZA15-16_BR.dta", replace
 *** (All eligible females 15-49 years in the household)
 ********************************************************************************
 
-use "$path_in/TZIR7HFL.DTA", clear
+use "$path_in/TZIR7AFL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -363,7 +363,7 @@ save "$path_out/TZA15-16_IR.dta", replace
 *** (Girls 15-19 years in the household)
 ********************************************************************************
 
-use "$path_in/TZIR7HFL.DTA", clear
+use "$path_in/TZIR7AFL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -519,7 +519,7 @@ erase "$path_out/girl_nutri_tza_z.dta"
 ***(All eligible man: 15-49 years in the household) 
 ********************************************************************************
 
-use "$path_in/TZMR7HFL.DTA", clear 
+use "$path_in/TZMR7AFL.DTA", clear 
 
 
 *** Generate individual unique key variable required for data merging
@@ -550,7 +550,7 @@ save "$path_out/TZA15-16_MR.dta", replace
 for men, hence variables in this section are identified with missing values.*/
 
 
-use "$path_in/TZMR7HFL.DTA", clear 
+use "$path_in/TZMR7AFL.DTA", clear 
 
 	
 *** Generate individual unique key variable required for data merging
@@ -586,7 +586,7 @@ save "$path_out/TZA15-16_MR_boys.dta", replace
 *** Step 1.7  PR - HOUSEHOLD MEMBER'S RECODE 
 ********************************************************************************
 
-use "$path_in/TZPR7HFL.DTA", clear
+use "$path_in/TZPR7AFL.DTA", clear
 
 *** Generate a household unique key variable at the household level using: 
 	***hv001=cluster number 

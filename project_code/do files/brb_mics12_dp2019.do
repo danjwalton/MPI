@@ -194,7 +194,7 @@ tab wasting, miss
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/BRB12_CH.dta", replace
+save "$path_out/brb12_CH.dta", replace
 
 
 	/*Erase files from folder:*/
@@ -274,7 +274,7 @@ rename marital marital_wom
 keep wm7 cm1 ceb csurv cdead ind_id women_WM *_wom
 order wm7 cm1 ceb csurv cdead ind_id women_WM *_wom
 sort ind_id
-save "$path_out/BRB12_WM.dta", replace
+save "$path_out/brb12_WM.dta", replace
 
 
 ********************************************************************************
@@ -306,7 +306,7 @@ codebook hh_id
 
 
 duplicates report hh_id 
-save "$path_out/BRB12_HH.dta", replace
+save "$path_out/brb12_HH.dta", replace
 
 
 ********************************************************************************
@@ -350,7 +350,7 @@ sort ind_id
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/BRB12_WM.dta"
+merge 1:1 ind_id using "$path_out/brb12_WM.dta"
 
 tab hl7, miss 
 gen temp = (hl7>0) 
@@ -360,30 +360,30 @@ drop temp
 
 drop _merge
 
-erase "$path_out/BRB12_WM.dta"
+erase "$path_out/brb12_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
 
-merge m:1 hh_id using "$path_out/BRB12_HH.dta"
+merge m:1 hh_id using "$path_out/brb12_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 drop _merge
 
-erase "$path_out/BRB12_HH.dta"
+erase "$path_out/brb12_HH.dta"
 
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/BRB12_CH.dta"
+merge 1:1 ind_id using "$path_out/brb12_CH.dta"
 count if ln==0 
 replace hh_id = hh1*100 + hh2 if ln==0 
 
 drop _merge
 
-erase "$path_out/BRB12_CH.dta"
+erase "$path_out/brb12_CH.dta"
 
 sort ind_id
 

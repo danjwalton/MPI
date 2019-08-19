@@ -202,7 +202,7 @@ tab wasting, miss
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/BTN10_CH.dta", replace
+save "$path_out/btn10_CH.dta", replace
 
 
 	//Erase files from folder:
@@ -277,7 +277,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom
 order wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom
 sort ind_id
-save "$path_out/BTN10_WM.dta", replace
+save "$path_out/btn10_WM.dta", replace
 
 
 ********************************************************************************
@@ -310,7 +310,7 @@ duplicates tag hh_id, gen(duplicates)
 drop if duplicates==1
 drop duplicates
 
-save "$path_out/BTN10_HH.dta", replace
+save "$path_out/btn10_HH.dta", replace
 
 
 ********************************************************************************
@@ -354,7 +354,7 @@ sort ind_id
 
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/BTN10_WM.dta"
+merge 1:1 ind_id using "$path_out/btn10_WM.dta"
 
 tab hl7, miss 
 gen temp = (hl7>0) 
@@ -365,23 +365,23 @@ drop temp
 
 drop _merge
 
-erase "$path_out/BTN10_WM.dta"
+erase "$path_out/btn10_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/BTN10_HH.dta"
+merge m:1 hh_id using "$path_out/btn10_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
 
-erase "$path_out/BTN10_HH.dta"
+erase "$path_out/btn10_HH.dta"
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/BTN10_CH.dta"
+merge 1:1 ind_id using "$path_out/btn10_CH.dta"
 count if ln==0 
 	//The children without household line are unique to the CH recode 
 replace hh_id = hh1*100 + hh2 if ln==0 
@@ -389,7 +389,7 @@ replace hh_id = hh1*100 + hh2 if ln==0
 
 drop _merge
 
-erase "$path_out/BTN10_CH.dta"
+erase "$path_out/btn10_CH.dta"
 
 sort ind_id
 

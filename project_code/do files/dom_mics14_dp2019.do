@@ -128,7 +128,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/DOM14_BH.dta", replace	
+save "$path_out/dom14_BH.dta", replace	
 
 
 
@@ -195,7 +195,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom
 order wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom
 sort ind_id
-save "$path_out/DOM14_WM.dta", replace
+save "$path_out/dom14_WM.dta", replace
 
 
 
@@ -228,7 +228,7 @@ lab var hh_id "Household ID"
 codebook hh_id
 
 
-save "$path_out/DOM14_HH.dta", replace
+save "$path_out/dom14_HH.dta", replace
 
 
 
@@ -269,14 +269,14 @@ sort ind_id
  
 *** Merging BR Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/DOM14_BH.dta"
+merge 1:1 ind_id using "$path_out/dom14_BH.dta"
 drop _merge
 erase "$path_out/dom14_BH.dta" 
   
   
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/DOM14_WM.dta"
+merge 1:1 ind_id using "$path_out/dom14_WM.dta"
 tab hl7, miss 
 gen temp = (hl7>0) 
 tab women_WM temp, miss col
@@ -289,7 +289,7 @@ erase "$path_out/dom14_WM.dta"
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/DOM14_HH.dta"
+merge m:1 hh_id using "$path_out/dom14_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 

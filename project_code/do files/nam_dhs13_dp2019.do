@@ -16,9 +16,9 @@ set mem 500m
 
 
 *** Working Folder Path ***
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files
-global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
-global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
+global path_in G:/My Drive/Work/GitHub/MPI/project_data/DHS MICS data files
+global path_out G:/My Drive/Work/GitHub/MPI/project_data/MPI out
+global path_ado G:/My Drive/Work/GitHub/MPI/project_data/ado
 
 
 ********************************************************************************
@@ -514,7 +514,7 @@ save "$path_out/NAM13_IR_girls.dta", replace
 ***(All eligible man: 15-64 years in the household) 
 ********************************************************************************
 
-use "$path_in/NMMR60FL.DTA", clear 
+use "$path_in/NMMR61FL.DTA", clear 
 
 
 *** Generate individual unique key variable required for data merging
@@ -588,7 +588,7 @@ save "$path_out/temp.dta", replace
 ***(Boys 15-19 years in the household) 
 ********************************************************************************
 
-use "$path_in/NMMR60FL.DTA", clear 
+use "$path_in/NMMR61FL.DTA", clear 
 
 	
 *** Generate individual unique key variable required for data merging

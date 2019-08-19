@@ -1,9 +1,5 @@
-required.packages <- c("reshape2","ggplot2","data.table","jsonlite","RCurl","XML","xml2","RStata","stringr","foreign","pkgload")
+required.packages <- c("reshape2","ggplot2","data.table","jsonlite","RCurl","XML","xml2","RStata","stringr","foreign")
 lapply(required.packages, require, character.only=T)
-
-install.packages("https://cran.rstudio.com//src/contrib/Archive/haven/haven_1.1.2.tar.gz")
-unload("haven")
-require(haven)
 
 wd <- "G:/My Drive/Work/GitHub/MPI/"
 setwd(wd)
@@ -16,7 +12,6 @@ basename.url=function(path){
 mics_dat <- fromJSON("project_data/mics.json",flatten=T)
 mics_dat <- subset(mics_dat,dataset.url!="")
 urls <- mics_dat$dataset.url
-# urls <- urls[c(184:length(urls))]
 uniquesavs=c()
 
 for(url in urls){
@@ -26,6 +21,11 @@ for(url in urls){
   if(exists("wm")){rm(wm)}
   if(exists("mn")){rm(mn)}
   if(exists("bh")){rm(bh)}
+  if(exists("ph")){rm(bh)}
+  if(exists("who_z")){rm(who_z)}
+  if(exists("fg")){rm(fg)}
+  if(exists("tn")){rm(tn)}
+  if(exists("fs")){rm(fs)}
   if(exists("uncaptured_list")){rm(uncaptured_list)}
   filename <- gsub("%20","_",basename.url(url))
   uniquename <- substr(filename,1,nchar(filename)-4)
@@ -57,45 +57,34 @@ for(url in urls){
   mn.sav2 <- zip.contents[which(grepl("^man(.*)sav|(.*)man.sav",tolower(basename(zip.contents))))]
   mn.sav <- c(mn.sav,mn.sav2)
   bh.sav <- zip.contents[which(grepl("^bh(.*)sav|(.*)bh.sav",tolower(basename(zip.contents))))]
+  ph.sav <- zip.contents[which(grepl("^ph(.*)sav|(.*)ph.sav",tolower(basename(zip.contents))))]
+  who_z.sav <- zip.contents[which(grepl("^who_z(.*)sav|(.*)who_z.sav",tolower(basename(zip.contents))))]
+  fg.sav <- zip.contents[which(grepl("^fg(.*)sav|(.*)fg.sav",tolower(basename(zip.contents))))]
+  tn.sav <- zip.contents[which(grepl("^tn(.*)sav|(.*)tn.sav",tolower(basename(zip.contents))))]
+  fs.sav <- zip.contents[which(grepl("^fs(.*)sav|(.*)fs.sav",tolower(basename(zip.contents))))]
   if(length(ch.sav)>0){
     ch <- read.spss(ch.sav, use.value.labels = F)
     ch["FILTER_$"] <- NULL
-    #ch.labs <- data.frame(var.name=names(ch),var.lab=attributes(ch)$variable.labels)
-    #ch$filename <- uniquename
   }else{
     ch <- NULL
-    #ch.labs <- NULL
   }
   if(length(hh.sav)>0){
-    hh <- read.spss(hh.sav, use.value.labels = F)
+    hh <- read.spss(hh.sav, use.value.labels = T)
     hh["FILTER_$"] <- NULL
-    #hh.labs <- data.frame(var.name=names(hh),var.lab=attributes(hh)$variable.labels)
-    #hh$filename <- uniquename
   }else{
     hh <- NULL
-    #hh.labs <- NULL
   }
   if(length(hl.sav)>0){
-    hl <- read.spss(hl.sav, use.value.labels = F)
+    hl <- read.spss(hl.sav, use.value.labels = T)
     hl["FILTER_$"] <- NULL
-    #hl.labs <- data.frame(var.name=names(hl),var.lab=attributes(hl)$variable.labels)
-    #hl$filename <- uniquename
   }else{
     hl <- NULL
-    #hl.labs <- NULL
   }
   if(length(wm.sav)>0){
-    wm <- read.spss(wm.sav, use.value.labels = F)
+    wm <- read.spss(wm.sav, use.value.labels = T)
     wm["FILTER_$"] <- NULL
-    #if(length(attributes(wm)$variable.labels)>0){
-    #wm.labs <- data.frame(var.name=names(wm),var.lab=attributes(wm)$variable.labels)
-    #}else{
-    #  wm.labs=data.frame(var.name=NA,var.lab=NA)
-    #}
-    #wm$filename <- uniquename
   }else{
     wm <- NULL
-    #wm.labs <- NULL
   }
   if(length(mn.sav)>0){
     if(grepl("mnmn",tolower(mn.sav))){
@@ -103,25 +92,51 @@ for(url in urls){
     }
     mn <- read.spss(mn.sav, use.value.labels = T)
     mn["FILTER_$"] <- NULL
-    #if(length(attributes(mn)$variable.labels)>0){
-    #mn.labs <- data.frame(var.name=names(mn),var.lab=attributes(mn)$variable.labels)
-    #}else{
-    #  mn.labs=data.frame(var.name=NA,var.lab=NA)
-    #}
-    #mn$filename <- uniquename
   }else{
     mn <- NULL
-    #mn.labs <- NULL
   }
-if(length(bh.sav)>0){
-  if(grepl("bhbh",tolower(bh.sav))){
-    bh.sav <- bh.sav[grepl("bhbh",tolower(bh.sav))]
+  if(length(bh.sav)>0){
+    if(grepl("bhbh",tolower(bh.sav))){
+      bh.sav <- bh.sav[grepl("bhbh",tolower(bh.sav))]
+    }
+    bh <- read.spss(bh.sav, use.value.labels = T)
+    bh["FILTER_$"] <- NULL
+  }else{
+    bh <- NULL
   }
-  bh <- read.spss(bh.sav, use.value.labels = T)
-  bh["FILTER_$"] <- NULL
-}else{
-  bh <- NULL
-}
+  if(length(ph.sav)>0){
+    if(grepl("phph",tolower(ph.sav))){
+      ph.sav <- ph.sav[grepl("phph",tolower(ph.sav))]
+    }
+    ph <- read.spss(ph.sav, use.value.labels = T)
+    ph["FILTER_$"] <- NULL
+  }else{
+    ph <- NULL
+  }
+  if(length(who_z.sav)>0){
+    who_z <- read.spss(who_z.sav, use.value.labels = F)
+    who_z["FILTER_$"] <- NULL
+  }else{
+    who_z <- NULL
+  }
+  if(length(fg.sav)>0){
+    fg <- read.spss(fg.sav, use.value.labels = F)
+    fg["FILTER_$"] <- NULL
+  }else{
+    fg <- NULL
+  }
+  if(length(tn.sav)>0){
+    tn <- read.spss(tn.sav, use.value.labels = F)
+    tn["FILTER_$"] <- NULL
+  }else{
+    tn <- NULL
+  }
+  if(length(fs.sav)>0){
+    fs <- read.spss(fs.sav, use.value.labels = F)
+    fs["FILTER_$"] <- NULL
+  }else{
+    fs <- NULL
+  }
   uncaptured=all.sav[which(!all.sav %in% c(
       ch.sav
       ,hh.sav
@@ -129,6 +144,11 @@ if(length(bh.sav)>0){
       ,wm.sav
       ,mn.sav
       ,bh.sav
+      ,ph.sav
+      ,who_z.sav
+      ,fg.sav
+      ,tn.sav
+      ,fs.sav
     ))]
   uncaptured_list=list()
   if(length(uncaptured)>0){
@@ -143,12 +163,37 @@ if(length(bh.sav)>0){
   dtapath <- paste0("project_data/DHS MICS data files/",uniquename)
   dir.create(dtapath)
   tryCatch({
-    write_dta(as.data.frame(ch),paste0(dtapath,"/ch.dta"),version=13.1)
-    write_dta(as.data.frame(hh),paste0(dtapath,"/hh.dta"),version=13.1)
-    write_dta(as.data.frame(hl),paste0(dtapath,"/hl.dta"),version=13.1)
-    write_dta(as.data.frame(wm),paste0(dtapath,"/wm.dta"),version=13.1)
-    write_dta(as.data.frame(mn),paste0(dtapath,"/mn.dta"),version=13.1)
-    write_dta(as.data.frame(bh),paste0(dtapath,"/bh.dta"),version=13.1)
+    write.dta(as.data.frame(ch),paste0(dtapath,"/ch.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(hh),paste0(dtapath,"/hh.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(hl),paste0(dtapath,"/hl.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(wm),paste0(dtapath,"/wm.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(mn),paste0(dtapath,"/mn.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(bh),paste0(dtapath,"/bh.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(ph),paste0(dtapath,"/ph.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(who_z),paste0(dtapath,"/who_z.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(fg),paste0(dtapath,"/fg.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(tn),paste0(dtapath,"/tn.dta"),version=12)
+  },error=function(e){return(NULL)})
+  tryCatch({
+    write.dta(as.data.frame(fs),paste0(dtapath,"/fs.dta"),version=12)
   },error=function(e){return(NULL)})
   rm(zip.contents)
 }

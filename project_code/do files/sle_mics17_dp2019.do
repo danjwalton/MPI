@@ -226,7 +226,7 @@ count
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/SLE17_CH.dta", replace
+save "$path_out/sle17_CH.dta", replace
 
 
 
@@ -325,7 +325,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/SLE17_BH.dta", replace	
+save "$path_out/sle17_BH.dta", replace	
 
 
 ********************************************************************************
@@ -387,7 +387,7 @@ rename marital marital_wom
 keep wm7* cm1 cm8 cm9 cm10 ind_id women_WM *_wom
 order wm7* cm1 cm8 cm9 cm10 ind_id women_WM *_wom
 sort ind_id
-save "$path_out/SLE17_WM.dta", replace
+save "$path_out/sle17_WM.dta", replace
 
 
 ********************************************************************************
@@ -451,7 +451,7 @@ rename marital marital_men
 keep mcm1 mcm8 mcm9 mcm10 ind_id men_MN *_men 
 order mcm1 mcm8 mcm9 mcm10 ind_id men_MN *_men 
 sort ind_id
-save "$path_out/SLE17_MN.dta", replace
+save "$path_out/sle17_MN.dta", replace
 
 
 ********************************************************************************
@@ -473,7 +473,7 @@ lab var hh_id "Household ID"
 
 
 duplicates report hh_id 
-save "$path_out/SLE17_HH.dta", replace
+save "$path_out/sle17_HH.dta", replace
 
 
 ********************************************************************************
@@ -513,43 +513,43 @@ sort ind_id
  
 *** Merging BR Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/SLE17_BH.dta"
+merge 1:1 ind_id using "$path_out/sle17_BH.dta"
 drop _merge
-erase "$path_out/SLE17_BH.dta" 
+erase "$path_out/sle17_BH.dta" 
  
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/SLE17_WM.dta"
+merge 1:1 ind_id using "$path_out/sle17_WM.dta"
 count if hl8>0
 	/*18,006 women 15-49 years were eligible for interview. This matches the 
 	country report (p.iii) */
 drop _merge
-erase "$path_out/SLE17_WM.dta"
+erase "$path_out/sle17_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/SLE17_HH.dta"
+merge m:1 hh_id using "$path_out/sle17_HH.dta"
 tab hh46 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
-erase "$path_out/SLE17_HH.dta"
+erase "$path_out/sle17_HH.dta"
 
 
 *** Merging MN Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/SLE17_MN.dta"
+merge 1:1 ind_id using "$path_out/sle17_MN.dta"
 drop _merge
-erase "$path_out/SLE17_MN.dta"
+erase "$path_out/sle17_MN.dta"
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/SLE17_CH.dta"
+merge 1:1 ind_id using "$path_out/sle17_CH.dta"
 drop _merge
-erase "$path_out/SLE17_CH.dta"
+erase "$path_out/sle17_CH.dta"
 
 
 sort ind_id

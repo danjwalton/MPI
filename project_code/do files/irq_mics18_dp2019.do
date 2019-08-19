@@ -17,7 +17,7 @@ set mem 500m
 
 
 *** Working Folder Path ***
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files/
+global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files/Iraq_MICS6_Datasets
 global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
 global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
 
@@ -220,7 +220,7 @@ count
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/IRQ18_CH.dta", replace	
+save "$path_out/irq18_CH.dta", replace	
 
 
 	//Erase files from folder:
@@ -318,7 +318,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/IRQ18_BH.dta", replace	
+save "$path_out/irq18_BH.dta", replace	
 
 
 ********************************************************************************
@@ -380,7 +380,7 @@ rename marital marital_wom
 keep wm7* cm1 cm8 cm9 cm10 ind_id women_WM marital_wom
 order wm7* cm1 cm8 cm9 cm10 ind_id women_WM marital_wom
 sort ind_id
-save "$path_out/IRQ18_WM.dta", replace
+save "$path_out/irq18_WM.dta", replace
 
 
 ********************************************************************************
@@ -409,7 +409,7 @@ lab var hh_id "Household ID"
 
 
 duplicates report hh_id 
-save "$path_out/IRQ18_HH.dta", replace
+save "$path_out/irq18_HH.dta", replace
 
 
 ********************************************************************************
@@ -449,37 +449,37 @@ sort ind_id
  
 *** Merging BR Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/IRQ18_BH.dta"
+merge 1:1 ind_id using "$path_out/irq18_BH.dta"
 drop _merge
-erase "$path_out/IRQ18_BH.dta" 
+erase "$path_out/irq18_BH.dta" 
  
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/IRQ18_WM.dta"
+merge 1:1 ind_id using "$path_out/irq18_WM.dta"
 count if hl8>0
 	/*31,060 women 15-49 years were eligible for interview. This matches the 
 	country report (p.6 of 592) */
 drop _merge
-erase "$path_out/IRQ18_WM.dta"
+erase "$path_out/irq18_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/IRQ18_HH.dta"
+merge m:1 hh_id using "$path_out/irq18_HH.dta"
 tab hh46 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
-erase "$path_out/IRQ18_HH.dta"
+erase "$path_out/irq18_HH.dta"
 
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/IRQ18_CH.dta"
+merge 1:1 ind_id using "$path_out/irq18_CH.dta"
 drop _merge
-erase "$path_out/IRQ18_CH.dta"
+erase "$path_out/irq18_CH.dta"
 
 
 sort ind_id

@@ -212,7 +212,7 @@ count if _fwei==1 | _flen==1
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/NGA16-17_CH.dta", replace
+save "$path_out/nga16-17_CH.dta", replace
 
 
 
@@ -317,7 +317,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/NGA16-17_BH.dta", replace	
+save "$path_out/nga16-17_BH.dta", replace	
 
 
 
@@ -382,7 +382,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom 
 order wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom 
 sort ind_id
-save "$path_out/NGA16-17_WM.dta", replace
+save "$path_out/nga16-17_WM.dta", replace
 
 
 ********************************************************************************
@@ -434,7 +434,7 @@ rename marital marital_men
 keep mcm1 mcm8 mcm9a mcm9b ind_id men_MN *_men 
 order mcm1 mcm8 mcm9a mcm9b ind_id men_MN *_men 
 sort ind_id
-save "$path_out/NGA16-17_MN.dta", replace
+save "$path_out/nga16-17_MN.dta", replace
 
 
 ********************************************************************************
@@ -457,7 +457,7 @@ lab var hh_id "Household ID"
 duplicates report hh_id 
 
 
-save "$path_out/NGA16-17_HH.dta", replace
+save "$path_out/nga16-17_HH.dta", replace
 
 
 ********************************************************************************
@@ -497,16 +497,16 @@ sort ind_id
  
 *** Merging BR Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/NGA16-17_BH.dta"
+merge 1:1 ind_id using "$path_out/nga16-17_BH.dta"
 
 drop _merge
 
-erase "$path_out/NGA16-17_BH.dta" 
+erase "$path_out/nga16-17_BH.dta" 
  
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/NGA16-17_WM.dta"
+merge 1:1 ind_id using "$path_out/nga16-17_WM.dta"
 
 tab hl7, miss 
 gen temp = (hl7>0) 
@@ -517,35 +517,35 @@ drop temp
 
 drop _merge
 
-erase "$path_out/NGA16-17_WM.dta"
+erase "$path_out/nga16-17_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/NGA16-17_HH.dta"
+merge m:1 hh_id using "$path_out/nga16-17_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
 
-erase "$path_out/NGA16-17_HH.dta"
+erase "$path_out/nga16-17_HH.dta"
 
 
 *** Merging MN Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/NGA16-17_MN.dta"
+merge 1:1 ind_id using "$path_out/nga16-17_MN.dta"
 drop _merge
 
-erase "$path_out/NGA16-17_MN.dta"
+erase "$path_out/nga16-17_MN.dta"
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/NGA16-17_CH.dta"
+merge 1:1 ind_id using "$path_out/nga16-17_CH.dta"
 
 drop _merge
 
-erase "$path_out/NGA16-17_CH.dta"
+erase "$path_out/nga16-17_CH.dta"
 
 sort ind_id
 

@@ -217,7 +217,7 @@ tab wasting, miss
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/CIV16_CH.dta", replace
+save "$path_out/civ16_CH.dta", replace
 
 
 	//Erase files from folder:
@@ -317,7 +317,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/CIV16_BH.dta", replace	
+save "$path_out/civ16_BH.dta", replace	
 
 
 
@@ -382,7 +382,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b wan2 wan3 wan4 ind_id women_WM *_wom
 order wm7 cm1 cm8 cm9a cm9b wan2 wan3 wan4 ind_id women_WM *_wom
 sort ind_id
-save "$path_out/CIV16_WM.dta", replace
+save "$path_out/civ16_WM.dta", replace
 
 
 ********************************************************************************
@@ -535,7 +535,7 @@ gen teen_IR=1
 keep ind_id teen_IR age_month low_bmiage*
 order ind_id teen_IR age_month low_bmiage*
 sort ind_id
-save "$path_out/CIV16_WM_girls.dta", replace
+save "$path_out/civ16_WM_girls.dta", replace
 
 
 	//Erase files from folder:
@@ -595,7 +595,7 @@ rename marital marital_men
 keep mceb mcsurv mcdead ind_id men_MN *_men 
 order mceb mcsurv mcdead ind_id men_MN *_men 
 sort ind_id
-save "$path_out/CIV16_MN.dta", replace
+save "$path_out/civ16_MN.dta", replace
 
 
 
@@ -616,7 +616,7 @@ gen	double hh_id = hh1*100 + hh2
 format	hh_id %20.0g
 lab var hh_id "Household ID"
 
-save "$path_out/CIV16_HH.dta", replace
+save "$path_out/civ16_HH.dta", replace
 
 
 
@@ -655,60 +655,60 @@ sort ind_id
  
 *** Merging BR Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/CIV16_BH.dta"
+merge 1:1 ind_id using "$path_out/civ16_BH.dta"
 drop _merge
-erase "$path_out/CIV16_BH.dta" 
+erase "$path_out/civ16_BH.dta" 
  
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/CIV16_WM.dta"
+merge 1:1 ind_id using "$path_out/civ16_WM.dta"
 tab hl7, miss 
 gen temp = (hl7>0) 
 tab women_WM temp, miss col
 tab wm7 if temp==1 & women_WM==., miss  
 	//Total of eligible women not interviewed 
 drop temp _merge
-erase "$path_out/CIV16_WM.dta"
+erase "$path_out/civ16_WM.dta"
 
 
 
 *** Merging WM Recode: 15-19 years girls 
 *****************************************
-merge 1:1 ind_id using "$path_out/CIV16_WM_girls.dta"
+merge 1:1 ind_id using "$path_out/civ16_WM_girls.dta"
 drop _merge
-erase "$path_out/CIV16_WM_girls.dta"
+erase "$path_out/civ16_WM_girls.dta"
 
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/CIV16_HH.dta"
+merge m:1 hh_id using "$path_out/civ16_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
-erase "$path_out/CIV16_HH.dta"
+erase "$path_out/civ16_HH.dta"
 
 
 
 *** Merging MN Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/CIV16_MN.dta"
+merge 1:1 ind_id using "$path_out/civ16_MN.dta"
 drop _merge
-erase "$path_out/CIV16_MN.dta"
+erase "$path_out/civ16_MN.dta"
 
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/CIV16_CH.dta"
+merge 1:1 ind_id using "$path_out/civ16_CH.dta"
 count if ln==0 
 	//The children without household line are unique to the CH recode 
 replace hh_id = hh1*100 + hh2 if ln==0 
 	//Creates hd_id for children without household line
 drop _merge
-erase "$path_out/CIV16_CH.dta"
+erase "$path_out/civ16_CH.dta"
 
 sort ind_id
 

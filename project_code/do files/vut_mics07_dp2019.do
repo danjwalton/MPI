@@ -211,7 +211,7 @@ count if _fwei==1 | _flen==1
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/VUT07_CH.dta", replace
+save "$path_out/vut07_CH.dta", replace
 
 
 	//Erase files from folder:
@@ -287,7 +287,7 @@ rename marital marital_wom
 keep wm7 cm1 cm7 cm8a cm8b ind_id women_WM *_wom 
 order wm7 cm1 cm7 cm8a cm8b ind_id women_WM *_wom
 sort ind_id
-save "$path_out/VUT07_WM.dta", replace
+save "$path_out/vut07_WM.dta", replace
 
 
 ********************************************************************************
@@ -316,7 +316,7 @@ format	hh_id %20.0g
 lab var hh_id "Household ID"
 
 
-save "$path_out/VUT07_HH.dta", replace
+save "$path_out/vut07_HH.dta", replace
 
 
 ********************************************************************************
@@ -359,7 +359,7 @@ sort ind_id
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/VUT07_WM.dta"
+merge 1:1 ind_id using "$path_out/vut07_WM.dta"
 tab hl6, miss 
 gen temp = (hl6>0) 
 tab women_WM temp, miss col
@@ -367,17 +367,17 @@ tab wm7 if temp==1 & women_WM==., miss
 	//Total of eligible women not interviewed 
 drop temp
 drop _merge
-erase "$path_out/VUT07_WM.dta"
+erase "$path_out/vut07_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/VUT07_HH.dta"
+merge m:1 hh_id using "$path_out/vut07_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
-erase "$path_out/VUT07_HH.dta"
+erase "$path_out/vut07_HH.dta"
 
 
 *** Merging MN Recode 
@@ -397,9 +397,9 @@ label var marital_men "Marital status of household member"
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/VUT07_CH.dta"
+merge 1:1 ind_id using "$path_out/vut07_CH.dta"
 drop _merge
-erase "$path_out/VUT07_CH.dta"
+erase "$path_out/vut07_CH.dta"
 
 
 sort ind_id

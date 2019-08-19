@@ -16,9 +16,9 @@ set maxvar 10000
 set mem 500m
 
 *** Working Folder Path ***
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files
-global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
-global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
+global path_in G:/My Drive/Work/GitHub/MPI/project_data/DHS MICS data files
+global path_out G:/My Drive/Work/GitHub/MPI/project_data/MPI out
+global path_ado G:/My Drive/Work/GitHub/MPI/project_data/ado
 
 
 ********************************************************************************
@@ -40,7 +40,7 @@ male survey, height and weight information was collected from eligible women
 *** Step 1.1 KR - CHILDREN's RECODE (under 5)
 ********************************************************************************
 
-use "$path_in/UGKR7HFL.DTA", clear 
+use "$path_in/UGKR7BFL.DTA", clear 
 
 
 *** Generate individual unique key variable required for data merging
@@ -246,7 +246,7 @@ save "$path_out/UGA16_KR.dta", replace
 *** (All females 15-49 years who ever gave birth)  
 ********************************************************************************
 
-use "$path_in/UGBR7HFL.DTA", clear
+use "$path_in/UGBR7BFL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -335,7 +335,7 @@ save "$path_out/UGA16_BR.dta", replace
 *** (All eligible females 15-49 years in the household)
 ********************************************************************************
 
-use "$path_in/UGIR7HFL.DTA", clear
+use "$path_in/UGIR7BFL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -364,7 +364,7 @@ save "$path_out/UGA16_IR.dta", replace
 *** (Girls 15-19 years in the household)
 ********************************************************************************
 
-use "$path_in/UGIR7HFL.DTA", clear
+use "$path_in/UGIR7BFL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -521,7 +521,7 @@ erase "$path_out/girl_nutri_uga_z.dta"
 ***(All eligible man: 15-54 years in the household) 
 ********************************************************************************
 
-use "$path_in/UGMR7HFL.DTA", clear 
+use "$path_in/UGMR7BFL.DTA", clear 
 
 
 *** Generate individual unique key variable required for data merging
@@ -557,7 +557,7 @@ and height variable from the PR file for boys 15 -19 years as it is not present
 in the individual MR file */
 
 
-use "$path_in/UGPR7HFL.DTA", clear
+use "$path_in/UGPR7BFL.DTA", clear
 	//Open the PR file to extract weight and height data for men
 	
 gen double ind_id = hv001*1000000 + hv002*100 + hvidx 
@@ -594,7 +594,7 @@ save "$path_out/temp.dta", replace
 ***(Boys 15-19 years in the household) 
 ********************************************************************************
 
-use "$path_in/UGMR7HFL.DTA", clear 
+use "$path_in/UGMR7BFL.DTA", clear 
 
 *** Generate individual unique key variable required for data merging
 *** v001=cluster number;  
@@ -761,7 +761,7 @@ erase "$path_out/boy_nutri_uga_z.dta"
 *** Step 1.7  PR - HOUSEHOLD MEMBER'S RECODE 
 ********************************************************************************
 
-use "$path_in/UGPR7HFL.DTA", clear
+use "$path_in/UGPR7BFL.DTA", clear
 
 *** Generate a household unique key variable at the household level using: 
 	***hv001=cluster number 

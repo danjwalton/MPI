@@ -213,7 +213,7 @@ because they have extreme z-scores which are biologically implausible.*/
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/DZA13_CH.dta", replace
+save "$path_out/dza13_CH.dta", replace
 
 
 	//Erase files from folder:
@@ -317,7 +317,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/DZA13_BH.dta", replace	
+save "$path_out/dza13_BH.dta", replace	
 
 
 ********************************************************************************
@@ -381,7 +381,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b ma5 ind_id women_WM *_wom
 order wm7 cm1 cm8 cm9a cm9b ma5 ind_id women_WM *_wom 
 sort ind_id
-save "$path_out/DZA13_WM.dta", replace
+save "$path_out/dza13_WM.dta", replace
 
 
 ********************************************************************************
@@ -409,7 +409,7 @@ format	hh_id %20.0g
 lab var hh_id "Household ID"
 
 
-save "$path_out/DZA13_HH.dta", replace
+save "$path_out/dza13_HH.dta", replace
 
 
 ********************************************************************************
@@ -447,14 +447,14 @@ sort ind_id
  
 *** Merging BH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/DZA13_BH.dta"
+merge 1:1 ind_id using "$path_out/dza13_BH.dta"
 drop _merge
-erase "$path_out/DZA13_BH.dta" 
+erase "$path_out/dza13_BH.dta" 
  
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/DZA13_WM.dta"
+merge 1:1 ind_id using "$path_out/dza13_WM.dta"
 tab hl7, miss 
 	/*Please make sure that hl7>0 does not include missing values.*/ 
 	/*Otherwise add the restriction 'if hl7!=.'*/
@@ -464,24 +464,24 @@ tab wm7 if temp==1 & women_WM==., miss
 	//Total of eligible women not interviewed
 drop temp
 drop _merge
-erase "$path_out/DZA13_WM.dta"
+erase "$path_out/dza13_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/DZA13_HH.dta"
+merge m:1 hh_id using "$path_out/dza13_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
-erase "$path_out/DZA13_HH.dta"
+erase "$path_out/dza13_HH.dta"
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/DZA13_CH.dta"
+merge 1:1 ind_id using "$path_out/dza13_CH.dta"
 drop _merge
-erase "$path_out/DZA13_CH.dta"
+erase "$path_out/dza13_CH.dta"
 
 
 sort ind_id

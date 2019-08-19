@@ -17,9 +17,9 @@ set mem 500m
 
 *** Working Folder Path ***
 
-global path_in G:/My Drive/Work/GitHub/MPI//project_data/DHS MICS data files
-global path_out G:/My Drive/Work/GitHub/MPI//project_data/MPI out
-global path_ado G:/My Drive/Work/GitHub/MPI//project_data/ado
+global path_in G:/My Drive/Work/GitHub/MPI/project_data/DHS MICS data files
+global path_out G:/My Drive/Work/GitHub/MPI/project_data/MPI out
+global path_ado G:/My Drive/Work/GitHub/MPI/project_data/ado
 
 
 ********************************************************************************
@@ -247,7 +247,7 @@ duplicates report ind_id
 	//Erase files from folder:
 erase "$path_out/children_nutri_mdg_z_rc.xls"
 erase "$path_out/children_nutri_mdg_prev_rc.xls"
-erase "$path_out/children_nutri_mDG_z_rc.dta"
+erase "$path_out/children_nutri_mdg_z_rc.dta"
 
 
 	//Save a temp file for merging with PR:

@@ -204,7 +204,7 @@ count if _fwei==1 | _flen==1
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/GUY14_CH.dta", replace
+save "$path_out/guy14_CH.dta", replace
 
 
 	//Erase files from folder:
@@ -304,7 +304,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/GUY14_BH.dta", replace	
+save "$path_out/guy14_BH.dta", replace	
 
 
 ********************************************************************************
@@ -375,7 +375,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom  
 order wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom 
 sort ind_id
-save "$path_out/GUY14_WM.dta", replace
+save "$path_out/guy14_WM.dta", replace
 
 
 ********************************************************************************
@@ -434,7 +434,7 @@ rename marital marital_men
 keep mcm1 mcm8 mcm9a mcm9b ind_id men_MN *_men 
 order mcm1 mcm8 mcm9a mcm9b ind_id men_MN *_men 
 sort ind_id
-save "$path_out/GUY14_MN.dta", replace
+save "$path_out/guy14_MN.dta", replace
 
 
 ********************************************************************************
@@ -454,7 +454,7 @@ format	hh_id %20.0g
 lab var hh_id "Household ID"
 codebook hh_id
 
-save "$path_out/GUY14_HH.dta", replace
+save "$path_out/guy14_HH.dta", replace
 
 
 ********************************************************************************
@@ -498,7 +498,7 @@ merge 1:1 ind_id using "$path_out/guy14_BH.dta"
 
 drop _merge
 
-erase "$path_out/GUY14_BH.dta" 
+erase "$path_out/guy14_BH.dta" 
   
 *** Merging WM Recode 
 *****************************************
@@ -513,7 +513,7 @@ drop temp
 
 drop _merge
 
-erase "$path_out/GUY14_WM.dta"
+erase "$path_out/guy14_WM.dta"
 
 *** Merging HH Recode 
 *****************************************
@@ -524,7 +524,7 @@ drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
 
-erase "$path_out/GUY14_HH.dta"
+erase "$path_out/guy14_HH.dta"
 
 *** Merging MN Recode 
 *****************************************
@@ -532,7 +532,7 @@ merge 1:1 ind_id using "$path_out/guy14_MN.dta"
 
 drop _merge
 
-erase "$path_out/GUY14_MN.dta
+erase "$path_out/guy14_MN.dta
 
 *** Merging CH Recode 
 *****************************************
@@ -540,7 +540,7 @@ merge 1:1 ind_id using "$path_out/guy14_CH.dta"
 
 drop _merge
 
-erase "$path_out/GUY14_CH.dta"
+erase "$path_out/guy14_CH.dta"
 
 sort ind_id
 

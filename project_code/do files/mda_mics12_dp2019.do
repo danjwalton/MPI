@@ -210,7 +210,7 @@ count if _fwei==1 | _flen==1
 keep ind_id child_CH ln underweight* stunting* wasting*  
 order ind_id child_CH ln underweight* stunting* wasting*
 sort ind_id
-save "$path_out/MDA12_CH.dta", replace
+save "$path_out/mda12_CH.dta", replace
 
 
 	//Erase files from folder:
@@ -326,7 +326,7 @@ gen women_BH = 1
 keep ind_id women_BH childu18_died_per_wom_5y 
 order ind_id women_BH childu18_died_per_wom_5y
 sort ind_id
-save "$path_out/MDA12_BH.dta", replace	
+save "$path_out/mda12_BH.dta", replace	
 
 
 ********************************************************************************
@@ -388,7 +388,7 @@ rename marital marital_wom
 keep wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom
 order wm7 cm1 cm8 cm9a cm9b ind_id women_WM *_wom
 sort ind_id
-save "$path_out/MDA12_WM.dta", replace
+save "$path_out/mda12_WM.dta", replace
 
 
 ********************************************************************************
@@ -454,7 +454,7 @@ rename marital marital_men
 keep mcm1 mcm8 mcm9a mcm9b ind_id men_MN *_men   
 order mcm1 mcm8 mcm9a mcm9b ind_id men_MN *_men 
 sort ind_id
-save "$path_out/MDA12_MN.dta", replace
+save "$path_out/mda12_MN.dta", replace
 
 
 ********************************************************************************
@@ -473,7 +473,7 @@ gen	double hh_id = hh1*100 + hh2
 format	hh_id %20.0g
 lab var hh_id "Household ID"
 
-save "$path_out/MDA12_HH.dta", replace
+save "$path_out/mda12_HH.dta", replace
 
 
 ********************************************************************************
@@ -511,45 +511,45 @@ sort ind_id
  
 *** Merging BR Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/MDA12_BH.dta"
+merge 1:1 ind_id using "$path_out/mda12_BH.dta"
 drop _merge
-erase "$path_out/MDA12_BH.dta" 
+erase "$path_out/mda12_BH.dta" 
  
  
 *** Merging WM Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/MDA12_WM.dta"
+merge 1:1 ind_id using "$path_out/mda12_WM.dta"
 tab hl7, miss 
 gen temp = (hl7>0) 
 tab women_WM temp, miss col
 tab wm7 if temp==1 & women_WM==., miss  
 	//Total of eligible women not interviewed 
 drop temp _merge
-erase "$path_out/MDA12_WM.dta"
+erase "$path_out/mda12_WM.dta"
 
 
 *** Merging HH Recode 
 *****************************************
-merge m:1 hh_id using "$path_out/MDA12_HH.dta"
+merge m:1 hh_id using "$path_out/mda12_HH.dta"
 tab hh9 if _m==2
 drop  if _merge==2
 	//Drop households that were not interviewed 
 drop _merge
-erase "$path_out/MDA12_HH.dta"
+erase "$path_out/mda12_HH.dta"
 
 
 *** Merging MN Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/MDA12_MN.dta"
+merge 1:1 ind_id using "$path_out/mda12_MN.dta"
 drop _merge
-erase "$path_out/MDA12_MN.dta"
+erase "$path_out/mda12_MN.dta"
 
 
 *** Merging CH Recode 
 *****************************************
-merge 1:1 ind_id using "$path_out/MDA12_CH.dta"
+merge 1:1 ind_id using "$path_out/mda12_CH.dta"
 drop _merge
-erase "$path_out/MDA12_CH.dta"
+erase "$path_out/mda12_CH.dta"
 
 
 sort ind_id

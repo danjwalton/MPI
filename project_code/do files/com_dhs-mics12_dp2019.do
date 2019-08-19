@@ -16,9 +16,9 @@ set mem 500m
 
 
 *** Working Folder Path ***
-global path_in "T:/GMPI 2.0/rdta/Comoros DHS-MICS 2012" 	  
-global path_out "G:/GMPI 2.0/cdta"
-global path_ado "T:/GMPI 2.0/ado"
+global path_in G:/My Drive/Work/GitHub/MPI/project_data/DHS MICS data files
+global path_out G:/My Drive/Work/GitHub/MPI/project_data/MPI out
+global path_ado G:/My Drive/Work/GitHub/MPI/project_data/ado
 	
 ********************************************************************************
 *** Comoros DHS-MICS 2012 ***
@@ -241,7 +241,7 @@ save "$path_out/COM12_KR.dta", replace
 *** (All females 15-49 years who ever gave birth)  
 ********************************************************************************
 
-use "$path_in/KMBR61FL.dta", clear
+use "$path_in/KMBR61FL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -332,7 +332,7 @@ save "$path_out/COM12_BR.dta", replace
 *** (All eligible females 15-49 years in the household)
 ********************************************************************************
 
-use "$path_in/KMIR61FL.dta", clear
+use "$path_in/KMIR61FL.DTA", clear
 
 
 *** Generate individual unique key variable required for data merging
@@ -360,7 +360,7 @@ save "$path_out/COM12_IR.dta", replace
 *** (Girls 15-19 years in the household)
 ********************************************************************************
 
-use "$path_in/KMIR61FL.dta", clear
+use "$path_in/KMIR61FL.DTA", clear
 	
 
 *** Generate individual unique key variable required for data merging
@@ -511,7 +511,7 @@ erase "$path_out/girl_nutri_com_z.dta"
 ***(All eligible man: 15-59 years in the household) 
 ********************************************************************************
 
-use "$path_in/KMMR61FL.dta", clear 
+use "$path_in/KMMR61FL.DTA", clear 
 
 
 *** Generate individual unique key variable required for data merging
@@ -548,7 +548,7 @@ for men */
 *** Step 1.7  PR - HOUSEHOLD MEMBER'S RECODE 
 ********************************************************************************
 
-use "$path_in/KMPR61FL.dta", clear
+use "$path_in/KMPR61FL.DTA", clear
 
 *** Generate a household unique key variable at the household level using: 
 	***hv001=cluster number 
